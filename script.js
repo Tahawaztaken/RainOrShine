@@ -1,50 +1,82 @@
-//Helper Functions for getWeatherData()
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-// Function to fetch weather data
-async function fetchWeatherData(cityName) {
-    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=fc58d7977c2a4037aab175512232308&q=${cityName}`);
-    const data = await response.json();
-    return data;
+const scene = new THREE.Scene()
+
+// Instantiate a loader
+const loader = new GLTFLoader();
+
+let earthMesh; // Store the reference to the loaded object
+
+loader.load( 'Earth.glb', function ( glb ) {
+
+    const root = glb.scene;
+    root.scale.set(0.03,0.03,0.03)
+
+    // Store the reference to the loaded object for rotation
+    earthMesh = glb.scene;
+
+	scene.add( glb.scene );
+    console.log(glb.scene)
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
+// Lighting
+const ambientlight = new THREE.AmbientLight(0xffffff, 1)
+scene.add(ambientlight)
+
+const light = new THREE.DirectionalLight(0xffffff, 2)
+light.position.set(-20, 5, 30)
+scene.add(light)
+
+// const dlHelper = new THREE.DirectionalLightHelper(light, 25);
+// scene.add(dlHelper)
+
+const pointLight = new THREE.PointLight(0xedd59e, 15, 30)
+pointLight.position.set(-20, 5, 30)
+scene.add(pointLight)
+
+// const plHelper = new THREE.PointLightHelper(pointLight, 25)
+// scene.add(plHelper)
+
+
+const sizes = {
+    width: window.innerWidth / 2,
+    height: window.innerHeight / 1.25
 }
 
-// Function to refine weather data
-function refineWeatherData(data) {
-    const refinedData = {
-        location: {
-            city: data["location"]["name"],
-            country: data["location"]["country"],
-            is_day: data["current"]["is_day"]
-        },
-        weather: {
-            condition: data["current"]["condition"]["text"],
-            temperature: data["current"]["temp_c"],
-            wind: data["current"]["wind_kph"],
-            humidity: data["current"]["humidity"],
-            feels_like: data["current"]["feelslike_c"]
-        }
-    };
-    return refinedData;
-}
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+camera.position.z = 30
+scene.add(camera)
 
-
-async function getWeatherData(cityName) {
-    const data = await fetchWeatherData(cityName);
-    const refinedData = refineWeatherData(data)
-    return refinedData;
-}
-
-
-
-const cityName = document.querySelector('#cityName')
-const pTag = document.querySelector('#data')
-const button = document.querySelector('#getData')
-
-button.addEventListener('click', async () => {
-    let cityNameText = cityName.value;
-    let data = await getWeatherData(cityNameText).catch(err => {
-        alert("City does not exist. Please check spelling.")
-        console.log(err)
-    })
-    console.log(data)
-    pTag.textContent = data["location"]["city"]
+const canvas = document.querySelector('.webgl')
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true // Make the canvas background transparent
 })
+renderer.setSize(sizes.width, sizes.height) // Update canvas size on window resize
+
+
+let angle = 2.5; // Initial rotation angle
+let angle2 = -5.9;
+
+function animate() {
+    requestAnimationFrame(animate)
+
+    // Update rotation angle
+    angle += 0.0009; // You can adjust the speed of rotation here
+    // Apply rotation to the object
+    if (earthMesh) {
+        earthMesh.rotation.y = angle;
+        earthMesh.rotation.x = angle2;
+
+    }
+
+    renderer.render(scene, camera)
+}
+
+animate()
