@@ -39,7 +39,7 @@ scene.add(light)
 // const dlHelper = new THREE.DirectionalLightHelper(light, 25);
 // scene.add(dlHelper)
 
-const pointLight = new THREE.PointLight(0xedd59e, 15, 30)
+const pointLight = new THREE.PointLight(0xedd59e, 5, 30)
 pointLight.position.set(-20, 5, 30)
 scene.add(pointLight)
 
