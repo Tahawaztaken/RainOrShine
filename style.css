@@ -3,7 +3,7 @@
 html, body {
     height: 100%;
     font-family: 'Roboto Slab','Nunito', sans-serif;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(130, 157, 158);
     margin: 0;
 }
 
@@ -65,12 +65,12 @@ h1 {
   height: 50px;
   outline: none;
   border: none;
-  background: rgb(47, 168, 128);
+  background: rgb(25, 167, 199);
   color: white;
-  text-shadow: 0 0 10px rgb(47, 168, 128);
+  text-shadow: 0 0 10px rgb(25, 167, 199);
   padding: 0 80px 0 20px;
   border-radius: 30px;
-  box-shadow: 0 0 25px 0 rgb(47, 168, 128),
+  box-shadow: 0 0 25px 0 rgb(25, 167, 199),
               0 20px 25px 0 rgba(0, 0, 0, 0.2);
   transition: all 1s;
   opacity: 1;
