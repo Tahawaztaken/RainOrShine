@@ -33,14 +33,14 @@ const ambientlight = new THREE.AmbientLight(0xffffff, 1)
 scene.add(ambientlight)
 
 const light = new THREE.DirectionalLight(0xffffff, 2)
-light.position.set(-20, 5, 30)
+light.position.set(-20, 15, 30)
 scene.add(light)
 
 // const dlHelper = new THREE.DirectionalLightHelper(light, 25);
 // scene.add(dlHelper)
 
 const pointLight = new THREE.PointLight(0xedd59e, 5, 30)
-pointLight.position.set(-20, 5, 30)
+pointLight.position.set(-20, 15, 30)
 scene.add(pointLight)
 
 // const plHelper = new THREE.PointLightHelper(pointLight, 25)
@@ -71,7 +71,7 @@ function animate() {
     requestAnimationFrame(animate)
 
     // Update rotation angle
-    angle += 0.0009; // You can adjust the speed of rotation here
+    angle += 0.09; // You can adjust the speed of rotation here
     // Apply rotation to the object
     if (earthMesh) {
         earthMesh.rotation.y = angle;
