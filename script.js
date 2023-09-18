@@ -53,7 +53,7 @@ const sizes = {
 }
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.z = 30
+camera.position.z = 25
 scene.add(camera)
 
 const canvas = document.querySelector('.webgl')
