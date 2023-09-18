@@ -1,8 +1,8 @@
-import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+// import * as THREE from 'three'
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-// import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
-// import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
 
 const scene = new THREE.Scene()
 
@@ -29,7 +29,7 @@ loader.load( 'Earth.glb', function ( glb ) {
 } );
 
 // Lighting
-const ambientlight = new THREE.AmbientLight(0xffffff, 1)
+const ambientlight = new THREE.AmbientLight(0x6633ff, 1)
 scene.add(ambientlight)
 
 const light = new THREE.DirectionalLight(0xffffff, 2)
@@ -39,7 +39,7 @@ scene.add(light)
 // const dlHelper = new THREE.DirectionalLightHelper(light, 25);
 // scene.add(dlHelper)
 
-const pointLight = new THREE.PointLight(0xedd59e, 15, 30)
+const pointLight = new THREE.PointLight(0xffffff, 2, 30)
 pointLight.position.set(-20, 5, 30)
 scene.add(pointLight)
 
@@ -53,7 +53,7 @@ const sizes = {
 }
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.z = 30
+camera.position.z = 25
 scene.add(camera)
 
 const canvas = document.querySelector('.webgl')
