@@ -71,7 +71,7 @@ function animate() {
     requestAnimationFrame(animate)
 
     // Update rotation angle
-    angle += 0.09; // You can adjust the speed of rotation here
+    angle += 0.0009; // You can adjust the speed of rotation here
     // Apply rotation to the object
     if (earthMesh) {
         earthMesh.rotation.y = angle;
