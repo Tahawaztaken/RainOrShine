@@ -3,6 +3,7 @@
 
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
 
 const scene = new THREE.Scene()
 
@@ -36,6 +37,10 @@ const light = new THREE.DirectionalLight(0xffffff, 2)
 light.position.set(-20, 5, 30)
 scene.add(light)
 
+
+const light2 = new THREE.DirectionalLight(0xffffff, 2)
+light.position.set(20, -5, 30)
+scene.add(light2)
 // const dlHelper = new THREE.DirectionalLightHelper(light, 25);
 // scene.add(dlHelper)
 
@@ -43,8 +48,19 @@ const pointLight = new THREE.PointLight(0xffffff, 2, 30)
 pointLight.position.set(-20, 5, 30)
 scene.add(pointLight)
 
+const pointLight2 = new THREE.PointLight(0xffffff, 2, 30)
+pointLight.position.set(20, -5, 30)
+scene.add(pointLight2)
+
+const pointLight3 = new THREE.PointLight(0xffffff, 2, 30)
+pointLight.position.set(-20, -5, 30)
+scene.add(pointLight3)
 // const plHelper = new THREE.PointLightHelper(pointLight, 25)
 // scene.add(plHelper)
+
+
+
+
 
 
 const sizes = {
@@ -61,6 +77,15 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     alpha: true // Make the canvas background transparent
 })
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.maxDistance = 40;
+controls.enablePan = false;
+controls.enableDamping = true;
+controls.dampingfactor = 0.4;
+controls.enableZoom = false;
+
+
 renderer.setSize(sizes.width, sizes.height) // Update canvas size on window resize
 
 
@@ -78,6 +103,8 @@ function animate() {
         earthMesh.rotation.x = angle2;
 
     }
+
+    controls.update();
 
     renderer.render(scene, camera)
 }
