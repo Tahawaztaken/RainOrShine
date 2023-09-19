@@ -57,6 +57,9 @@ h1 {
     opacity: 80%;
 }
 
+.webgl:focus {
+  outline: none;
+}
 
 
 #cityName {
